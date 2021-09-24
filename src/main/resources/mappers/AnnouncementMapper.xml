@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.tjh.applet.model.dao.AnnouncementMapper">
+    <resultMap id="BaseResultMap" type="priv.tjh.applet.model.pojo.Announcement">
+        <id column="ggtzdm" jdbcType="INTEGER" property="ggtzdm"/>
+        <result column="bt" jdbcType="VARCHAR" property="bt"/>
+        <result column="fbfw" jdbcType="VARCHAR" property="fbfw"/>
+        <result column="istop" jdbcType="INTEGER" property="istop"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="cjsj" jdbcType="DATE" property="cjsj"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ggtzdm, bt, fbfw, istop, summary, cjsj
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from announcement
+        where ggtzdm = #{ggtzdm,jdbcType=INTEGER}
+    </select>
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from announcement
+    </select>
+    <select id="selectBycjsj" resultMap="BaseResultMap" parameterType="integer">
+        select
+        <include refid="Base_Column_List"></include>
+        from announcement
+        order by cjsj desc
+        limit #{count}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from announcement
+        where ggtzdm = #{ggtzdm,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteAll">
+        delete
+        from announcement
+    </delete>
+    <insert id="insert" parameterType="priv.tjh.applet.model.pojo.Announcement">
+        insert into announcement (ggtzdm, bt, fbfw,
+                                  istop, summary, cjsj)
+        values (#{ggtzdm,jdbcType=INTEGER}, #{bt,jdbcType=VARCHAR}, #{fbfw,jdbcType=VARCHAR},
+                #{istop,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, #{cjsj,jdbcType=DATE})
+    </insert>
+    <insert id="insertSelective" parameterType="priv.tjh.applet.model.pojo.Announcement">
+        insert into announcement
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ggtzdm != null">
+                ggtzdm,
+            </if>
+            <if test="bt != null">
+                bt,
+            </if>
+            <if test="fbfw != null">
+                fbfw,
+            </if>
+            <if test="istop != null">
+                istop,
+            </if>
+            <if test="summary != null">
+                summary,
+            </if>
+            <if test="cjsj != null">
+                cjsj,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ggtzdm != null">
+                #{ggtzdm,jdbcType=INTEGER},
+            </if>
+            <if test="bt != null">
+                #{bt,jdbcType=VARCHAR},
+            </if>
+            <if test="fbfw != null">
+                #{fbfw,jdbcType=VARCHAR},
+            </if>
+            <if test="istop != null">
+                #{istop,jdbcType=INTEGER},
+            </if>
+            <if test="summary != null">
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="cjsj != null">
+                #{cjsj,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="priv.tjh.applet.model.pojo.Announcement">
+        update announcement
+        <set>
+            <if test="bt != null">
+                bt = #{bt,jdbcType=VARCHAR},
+            </if>
+            <if test="fbfw != null">
+                fbfw = #{fbfw,jdbcType=VARCHAR},
+            </if>
+            <if test="istop != null">
+                istop = #{istop,jdbcType=INTEGER},
+            </if>
+            <if test="summary != null">
+                summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="cjsj != null">
+                cjsj = #{cjsj,jdbcType=DATE},
+            </if>
+        </set>
+        where ggtzdm = #{ggtzdm,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="priv.tjh.applet.model.pojo.Announcement">
+        update announcement
+        set bt      = #{bt,jdbcType=VARCHAR},
+            fbfw    = #{fbfw,jdbcType=VARCHAR},
+            istop   = #{istop,jdbcType=INTEGER},
+            summary = #{summary,jdbcType=VARCHAR},
+            cjsj    = #{cjsj,jdbcType=DATE}
+        where ggtzdm = #{ggtzdm,jdbcType=INTEGER}
+    </update>
+</mapper>

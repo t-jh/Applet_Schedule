@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.tjh.applet.model.dao.ScheduleMapper">
+    <resultMap id="BaseResultMap" type="priv.tjh.applet.model.pojo.Schedule">
+        <id column="dgksdm" jdbcType="INTEGER" property="dgksdm"/>
+        <result column="kbdm" jdbcType="VARCHAR" property="kbdm"/>
+        <result column="kcbh" jdbcType="VARCHAR" property="kcbh"/>
+        <result column="kcmc" jdbcType="VARCHAR" property="kcmc"/>
+        <result column="teaxms" jdbcType="VARCHAR" property="teaxms"/>
+        <result column="jxbdm" jdbcType="VARCHAR" property="jxbdm"/>
+        <result column="xnxqdm" jdbcType="VARCHAR" property="xnxqdm"/>
+        <result column="jxbmc" jdbcType="VARCHAR" property="jxbmc"/>
+        <result column="zc" jdbcType="INTEGER" property="zc"/>
+        <result column="jcdm" jdbcType="VARCHAR" property="jcdm"/>
+        <result column="jcdm2" jdbcType="VARCHAR" property="jcdm2"/>
+        <result column="xq" jdbcType="INTEGER" property="xq"/>
+        <result column="jxcdmc" jdbcType="VARCHAR" property="jxcdmc"/>
+        <result column="sknrjj" jdbcType="VARCHAR" property="sknrjj"/>
+        <result column="teadms" jdbcType="VARCHAR" property="teadms"/>
+        <result column="jxcddm" jdbcType="VARCHAR" property="jxcddm"/>
+        <result column="kcdm" jdbcType="VARCHAR" property="kcdm"/>
+        <result column="zxs" jdbcType="INTEGER" property="zxs"/>
+        <result column="xs" jdbcType="INTEGER" property="xs"/>
+        <result column="pkrs" jdbcType="INTEGER" property="pkrs"/>
+        <result column="kxh" jdbcType="INTEGER" property="kxh"/>
+        <result column="flfzmc" jdbcType="VARCHAR" property="flfzmc"/>
+        <result column="jxhjmc" jdbcType="VARCHAR" property="jxhjmc"/>
+        <result column="tkbz" jdbcType="INTEGER" property="tkbz"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        dgksdm, kbdm, kcbh, kcmc, teaxms, jxbdm, xnxqdm, jxbmc, zc, jcdm, jcdm2, xq, jxcdmc,
+    sknrjj, teadms, jxcddm, kcdm, zxs, xs, pkrs, kxh, flfzmc, jxhjmc, tkbz
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from schedule
+        where dgksdm = #{dgksdm,jdbcType=INTEGER}
+    </select>
+    <select id="selectByxnxqdm" resultMap="BaseResultMap" parameterType="string">
+        select
+        <include refid="Base_Column_List"></include>
+        from schedule
+        where xnxqdm = #{xnxqdm}
+    </select>
+    <select id="selectByzc" resultType="priv.tjh.applet.model.pojo.Schedule">
+        select
+        <include refid="Base_Column_List"></include>
+        from schedule
+        where xnxqdm = #{xnxqdm} and zc = #{zc}
+        order by xq, jcdm
+    </select>
+    <select id="table" resultType="java.lang.Integer">
+        select zc
+        from schedule
+        where xq = #{xq} and jcdm = #{jcdm}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from schedule
+        where dgksdm = #{dgksdm,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByxnxqdm" parameterType="string">
+        delete
+        from schedule
+        where xnxqdm = #{xnxqdm}
+    </delete>
+    <insert id="insert" parameterType="priv.tjh.applet.model.pojo.Schedule">
+        insert into schedule (dgksdm, kbdm, kcbh,
+                              kcmc, teaxms, jxbdm,
+                              xnxqdm, jxbmc, zc,
+                              jcdm, jcdm2, xq, jxcdmc,
+                              sknrjj, teadms, jxcddm,
+                              kcdm, zxs, xs, pkrs,
+                              kxh, flfzmc, jxhjmc,
+                              tkbz)
+        values (#{dgksdm,jdbcType=INTEGER}, #{kbdm,jdbcType=VARCHAR}, #{kcbh,jdbcType=VARCHAR},
+                #{kcmc,jdbcType=VARCHAR}, #{teaxms,jdbcType=VARCHAR}, #{jxbdm,jdbcType=VARCHAR},
+                #{xnxqdm,jdbcType=VARCHAR}, #{jxbmc,jdbcType=VARCHAR}, #{zc,jdbcType=INTEGER},
+                #{jcdm,jdbcType=INTEGER}, #{jcdm2,jdbcType=VARCHAR}, #{xq,jdbcType=INTEGER}, #{jxcdmc,jdbcType=VARCHAR},
+                #{sknrjj,jdbcType=VARCHAR}, #{teadms,jdbcType=VARCHAR}, #{jxcddm,jdbcType=VARCHAR},
+                #{kcdm,jdbcType=VARCHAR}, #{zxs,jdbcType=INTEGER}, #{xs,jdbcType=INTEGER}, #{pkrs,jdbcType=INTEGER},
+                #{kxh,jdbcType=INTEGER}, #{flfzmc,jdbcType=VARCHAR}, #{jxhjmc,jdbcType=VARCHAR},
+                #{tkbz,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="priv.tjh.applet.model.pojo.Schedule">
+        insert into schedule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dgksdm != null">
+                dgksdm,
+            </if>
+            <if test="kbdm != null">
+                kbdm,
+            </if>
+            <if test="kcbh != null">
+                kcbh,
+            </if>
+            <if test="kcmc != null">
+                kcmc,
+            </if>
+            <if test="teaxms != null">
+                teaxms,
+            </if>
+            <if test="jxbdm != null">
+                jxbdm,
+            </if>
+            <if test="xnxqdm != null">
+                xnxqdm,
+            </if>
+            <if test="jxbmc != null">
+                jxbmc,
+            </if>
+            <if test="zc != null">
+                zc,
+            </if>
+            <if test="jcdm != null">
+                jcdm,
+            </if>
+            <if test="jcdm2 != null">
+                jcdm2,
+            </if>
+            <if test="xq != null">
+                xq,
+            </if>
+            <if test="jxcdmc != null">
+                jxcdmc,
+            </if>
+            <if test="sknrjj != null">
+                sknrjj,
+            </if>
+            <if test="teadms != null">
+                teadms,
+            </if>
+            <if test="jxcddm != null">
+                jxcddm,
+            </if>
+            <if test="kcdm != null">
+                kcdm,
+            </if>
+            <if test="zxs != null">
+                zxs,
+            </if>
+            <if test="xs != null">
+                xs,
+            </if>
+            <if test="pkrs != null">
+                pkrs,
+            </if>
+            <if test="kxh != null">
+                kxh,
+            </if>
+            <if test="flfzmc != null">
+                flfzmc,
+            </if>
+            <if test="jxhjmc != null">
+                jxhjmc,
+            </if>
+            <if test="tkbz != null">
+                tkbz,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dgksdm != null">
+                #{dgksdm,jdbcType=INTEGER},
+            </if>
+            <if test="kbdm != null">
+                #{kbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="kcbh != null">
+                #{kcbh,jdbcType=VARCHAR},
+            </if>
+            <if test="kcmc != null">
+                #{kcmc,jdbcType=VARCHAR},
+            </if>
+            <if test="teaxms != null">
+                #{teaxms,jdbcType=VARCHAR},
+            </if>
+            <if test="jxbdm != null">
+                #{jxbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="xnxqdm != null">
+                #{xnxqdm,jdbcType=VARCHAR},
+            </if>
+            <if test="jxbmc != null">
+                #{jxbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="zc != null">
+                #{zc,jdbcType=INTEGER},
+            </if>
+            <if test="jcdm != null">
+                #{jcdm,jdbcType=INTEGER},
+            </if>
+            <if test="jcdm2 != null">
+                #{jcdm2,jdbcType=VARCHAR},
+            </if>
+            <if test="xq != null">
+                #{xq,jdbcType=INTEGER},
+            </if>
+            <if test="jxcdmc != null">
+                #{jxcdmc,jdbcType=VARCHAR},
+            </if>
+            <if test="sknrjj != null">
+                #{sknrjj,jdbcType=VARCHAR},
+            </if>
+            <if test="teadms != null">
+                #{teadms,jdbcType=VARCHAR},
+            </if>
+            <if test="jxcddm != null">
+                #{jxcddm,jdbcType=VARCHAR},
+            </if>
+            <if test="kcdm != null">
+                #{kcdm,jdbcType=VARCHAR},
+            </if>
+            <if test="zxs != null">
+                #{zxs,jdbcType=INTEGER},
+            </if>
+            <if test="xs != null">
+                #{xs,jdbcType=INTEGER},
+            </if>
+            <if test="pkrs != null">
+                #{pkrs,jdbcType=INTEGER},
+            </if>
+            <if test="kxh != null">
+                #{kxh,jdbcType=INTEGER},
+            </if>
+            <if test="flfzmc != null">
+                #{flfzmc,jdbcType=VARCHAR},
+            </if>
+            <if test="jxhjmc != null">
+                #{jxhjmc,jdbcType=VARCHAR},
+            </if>
+            <if test="tkbz != null">
+                #{tkbz,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="priv.tjh.applet.model.pojo.Schedule">
+        update schedule
+        <set>
+            <if test="kbdm != null">
+                kbdm = #{kbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="kcbh != null">
+                kcbh = #{kcbh,jdbcType=VARCHAR},
+            </if>
+            <if test="kcmc != null">
+                kcmc = #{kcmc,jdbcType=VARCHAR},
+            </if>
+            <if test="teaxms != null">
+                teaxms = #{teaxms,jdbcType=VARCHAR},
+            </if>
+            <if test="jxbdm != null">
+                jxbdm = #{jxbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="xnxqdm != null">
+                xnxqdm = #{xnxqdm,jdbcType=VARCHAR},
+            </if>
+            <if test="jxbmc != null">
+                jxbmc = #{jxbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="zc != null">
+                zc = #{zc,jdbcType=INTEGER},
+            </if>
+            <if test="jcdm != null">
+                jcdm = #{jcdm,jdbcType=INTEGER},
+            </if>
+            <if test="jcdm2 != null">
+                jcdm2 = #{jcdm2,jdbcType=VARCHAR},
+            </if>
+            <if test="xq != null">
+                xq = #{xq,jdbcType=INTEGER},
+            </if>
+            <if test="jxcdmc != null">
+                jxcdmc = #{jxcdmc,jdbcType=VARCHAR},
+            </if>
+            <if test="sknrjj != null">
+                sknrjj = #{sknrjj,jdbcType=VARCHAR},
+            </if>
+            <if test="teadms != null">
+                teadms = #{teadms,jdbcType=VARCHAR},
+            </if>
+            <if test="jxcddm != null">
+                jxcddm = #{jxcddm,jdbcType=VARCHAR},
+            </if>
+            <if test="kcdm != null">
+                kcdm = #{kcdm,jdbcType=VARCHAR},
+            </if>
+            <if test="zxs != null">
+                zxs = #{zxs,jdbcType=INTEGER},
+            </if>
+            <if test="xs != null">
+                xs = #{xs,jdbcType=INTEGER},
+            </if>
+            <if test="pkrs != null">
+                pkrs = #{pkrs,jdbcType=INTEGER},
+            </if>
+            <if test="kxh != null">
+                kxh = #{kxh,jdbcType=INTEGER},
+            </if>
+            <if test="flfzmc != null">
+                flfzmc = #{flfzmc,jdbcType=VARCHAR},
+            </if>
+            <if test="jxhjmc != null">
+                jxhjmc = #{jxhjmc,jdbcType=VARCHAR},
+            </if>
+            <if test="tkbz != null">
+                tkbz = #{tkbz,jdbcType=INTEGER},
+            </if>
+        </set>
+        where dgksdm = #{dgksdm,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="priv.tjh.applet.model.pojo.Schedule">
+        update schedule
+        set kbdm   = #{kbdm,jdbcType=VARCHAR},
+            kcbh   = #{kcbh,jdbcType=VARCHAR},
+            kcmc   = #{kcmc,jdbcType=VARCHAR},
+            teaxms = #{teaxms,jdbcType=VARCHAR},
+            jxbdm  = #{jxbdm,jdbcType=VARCHAR},
+            xnxqdm = #{xnxqdm,jdbcType=VARCHAR},
+            jxbmc  = #{jxbmc,jdbcType=VARCHAR},
+            zc     = #{zc,jdbcType=INTEGER},
+            jcdm   = #{jcdm,jdbcType=INTEGER},
+            jcdm2  = #{jcdm2,jdbcType=VARCHAR},
+            xq     = #{xq,jdbcType=INTEGER},
+            jxcdmc = #{jxcdmc,jdbcType=VARCHAR},
+            sknrjj = #{sknrjj,jdbcType=VARCHAR},
+            teadms = #{teadms,jdbcType=VARCHAR},
+            jxcddm = #{jxcddm,jdbcType=VARCHAR},
+            kcdm   = #{kcdm,jdbcType=VARCHAR},
+            zxs    = #{zxs,jdbcType=INTEGER},
+            xs     = #{xs,jdbcType=INTEGER},
+            pkrs   = #{pkrs,jdbcType=INTEGER},
+            kxh    = #{kxh,jdbcType=INTEGER},
+            flfzmc = #{flfzmc,jdbcType=VARCHAR},
+            jxhjmc = #{jxhjmc,jdbcType=VARCHAR},
+            tkbz   = #{tkbz,jdbcType=INTEGER}
+        where dgksdm = #{dgksdm,jdbcType=INTEGER}
+    </update>
+</mapper>
